@@ -3,13 +3,16 @@ import "./MainPage.module.css";
 import axios from "axios";
 
 export default function MainPage(props) {
-  const [meal, setMeal] = useState([] || localStorage.getItem("meals", meal));
+  const [meal, setMeal] = useState([] || localStorage.getItem("meals"));
   const src = "https://www.themealdb.com/api/json/v1/1/random.php";
   useEffect(() => {
     axios.get(src).then((data) => {
+     // console.log(data.data.meals)
       setMeal(data.data.meals[0]);
+      console.log(meal)
     });
   }, []);
+  console.log("render")
   return (
     <div className="mainPage">
       <header>The Meal</header>
