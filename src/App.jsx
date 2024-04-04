@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import "./App.css";
 import MainPage from "./pages/MainPage/MainPage";
+import MealPage from "./pages/MealPage/MealPage";
+import axios from "axios";
+import Header from "./components/Header";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
-  const [meals, setMeals] = useState(
-    [] || localStorage.getItem("meals", meals)
-  );
+  
   return (
     <>
-      <MainPage />
+      {/* <Header />
+      <Routes>
+        <Route path="/" Component={MainPage} />
+        <Route path="/meals" Component={MealPage} />
+      </Routes> */}
+      <MainPage/>
     </>
   );
 }
