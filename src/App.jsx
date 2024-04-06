@@ -7,15 +7,14 @@ import Header from "./components/Header";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
-  
   return (
     <>
-      {/* <Header />
+      <Header />
       <Routes>
         <Route path="/" Component={MainPage} />
         <Route path="/meals" Component={MealPage} />
-      </Routes> */}
-      <MainPage/>
+      </Routes>
+      <MainPage />
     </>
   );
 }

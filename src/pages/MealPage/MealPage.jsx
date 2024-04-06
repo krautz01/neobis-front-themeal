@@ -2,29 +2,71 @@ import React from "react";
 import "./MealPage.module.css";
 
 export default function MealPage() {
+  const { mealId } = useParams();
+  const [meal, setMeal] = useState(null);
+
+  useEffect(() => {
+    const fetchMeal = async () => {
+      try {
+        const response = await axios.get(
+          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`
+        );
+        if (response.data.meals && response.data.meals.length > 0) {
+          setMeal(response.data.meals[0]);
+        } else {
+          setMeal(null);
+        }
+      } catch (error) {
+        console.log("Error fetching meal details:", error.message);
+      }
+    };
+
+    fetchMeal();
+  }, [mealId]);
+
+  const printIngredientsWithMeasure = (meal) => {
+    const ingredients = [];
+    for (let i = 1; i <= 20; i++) {
+      const ingredient = meal[`strIngredient${i}`];
+      const measure = meal[`strMeasure${i}`];
+      if (ingredient && ingredient.trim() !== "") {
+        ingredients.push({ ingredient, measure });
+      }
+    }
+    return ingredients.map((item, index) => (
+      <li key={index}>
+        {item.ingredient} - {item.measure}
+      </li>
+    ));
+  };
+
   return (
     <div className="mealPage">
-      <section className="description"></section>
-      <section className="instruction">
-        <div className="desc_text">
-          1 Preheat the oven to 230°C. 2 Add the sugar and crumble the fresh
-          yeast into warm water. 3 Allow the mixture to stand for 10 – 15
-          minutes in a warm place (we find a windowsill on a sunny day works
-          best) until froth develops on the surface. 4 Sift the flour and salt
-          into a large mixing bowl, make a well in the middle and pour in the
-          yeast mixture and olive oil. 5 Lightly flour your hands, and slowly
-          mix the ingredients together until they bind. 6 Generously dust your
-          surface with flour. 7 Throw down the dough and begin kneading for 10
-          minutes until smooth, silky and soft. 8 Place in a lightly oiled,
-          non-stick baking tray (we use a round one, but any shape will do!) 9
-          Spread the passata on top making sure you go to the edge. 10 Evenly
-          place the mozzarella (or other cheese) on top, season with the oregano
-          and black pepper, then drizzle with a little olive oil. 11 Cook in the
-          oven for 10 – 12 minutes until the cheese slightly colours. 12 When
-          ready, place the basil leaf on top and tuck in!
+      {meal && (
+        <div className="meal-details home">
+          <section className="random-meal">
+            <div className="meal-info">
+              <h2 className="title">{meal.strMeal}</h2>
+              <p>
+                {meal.strCategory} | {meal.strArea}
+              </p>
+              <h3>Ingredients:</h3>
+              <ul>{printIngredientsWithMeasure(meal)}</ul>
+            </div>
+            <div className="meal-img">
+              <img src={meal.strMealThumb} alt={meal.strMeal} />
+            </div>
+          </section>
+          <section className="add-info">
+            <h1>Instruction</h1>
+            <p>{meal.strInstructions}</p>
+            <h2>YouTube Tutorial:</h2>
+            <p className="meal-link-video">
+              <a href={meal.strYoutube}>Watch Now</a>
+            </p>
+          </section>
         </div>
-        <button className="youTube_tutorial_button" />
-      </section>
+      )}
     </div>
   );
 }
