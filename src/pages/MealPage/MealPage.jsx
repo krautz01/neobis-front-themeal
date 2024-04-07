@@ -39,6 +39,7 @@ export default function MealPage() {
                 {meal.strCategory} | {meal.strArea}
               </div>
               <Ingredients meal={meal} />
+              <a href="https://itchief.ru/html-and-css/media-queries">gg54455353gggg</a>
             </div>
             <img
               src={meal.strMealThumb}
@@ -49,7 +50,7 @@ export default function MealPage() {
           <section className={styles.meal_instruction}>
             <h2>Instruction</h2>
             <p>{meal.strInstructions}</p>
-            <Button strYoutube={meal.strYoutube} />
+            <Button meal={meal} />
           </section>
         </div>
       )}
