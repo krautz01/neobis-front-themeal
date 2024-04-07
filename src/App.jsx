@@ -11,9 +11,8 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" Component={MainPage} />
-        <Route path="/meal/id" Component={MealPage} />
+        <Route path="/meal/:mealId" Component={MealPage} />
       </Routes>
-      <MainPage />
     </>
   );
 }

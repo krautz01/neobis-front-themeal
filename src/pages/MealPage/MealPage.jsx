@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./MealPage.module.css";
+import { useParams } from "react-router";
+import axios from "axios";
 
 export default function MealPage() {
   const { mealId } = useParams();
@@ -70,3 +72,9 @@ export default function MealPage() {
     </div>
   );
 }
+
+/* export default function MealPage() {
+  return (
+    <div>sdhhduhvjv</div>
+  )
+} */
