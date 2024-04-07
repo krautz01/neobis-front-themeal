@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./MealPage.module.css";
 import { useParams } from "react-router";
 import axios from "axios";
+import Ingredients from "../../components/Ingredients";
 
 export default function MealPage() {
   const { mealId } = useParams();
@@ -26,22 +27,6 @@ export default function MealPage() {
     fetchMeal();
   }, [mealId]);
 
-  const printIngredientsWithMeasure = (meal) => {
-    const ingredients = [];
-    for (let i = 1; i <= 20; i++) {
-      const ingredient = meal[`strIngredient${i}`];
-      const measure = meal[`strMeasure${i}`];
-      if (ingredient && ingredient.trim() !== "") {
-        ingredients.push({ ingredient, measure });
-      }
-    }
-    return ingredients.map((item, index) => (
-      <li key={index}>
-        {item.ingredient} - {item.measure}
-      </li>
-    ));
-  };
-
   return (
     <div className={styles.mealPage}>
       {meal && (
@@ -52,8 +37,7 @@ export default function MealPage() {
               <p>
                 {meal.strCategory} | {meal.strArea}
               </p>
-              <h3>Ingredients:</h3>
-              <ul>{printIngredientsWithMeasure(meal)}</ul>
+              <Ingredients meal={meal}/>
             </div>
             <div className={styles.meal_img}>
               <img src={meal.strMealThumb} alt={meal.strMeal} />
@@ -73,8 +57,3 @@ export default function MealPage() {
   );
 }
 
-/* export default function MealPage() {
-  return (
-    <div>sdhhduhvjv</div>
-  )
-} */
