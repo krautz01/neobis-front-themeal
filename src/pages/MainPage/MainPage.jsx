@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "./MainPage.module.css";
+import styles from "./MainPage.module.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function MainPage(props) {
+export default function MainPage() {
   const src = "https://www.themealdb.com/api/json/v1/1/random.php";
   const [meal, setMeal] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,41 +12,45 @@ export default function MainPage(props) {
     axios.get(src).then((data) => {
       // console.log(data.data.meals)
       setMeal(data.data.meals[0]);
-      console.log(meal);
+      //console.log(meal);
     });
   }, []);
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.get(
-        `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`
-      );
-      if (response.data.meals) {
-        setSearchResult(response.data.meals);
-      } else {
-        setSearchResult([]);
+    if (searchTerm != "") {
+      try {
+        const response = await axios.get(
+          `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`
+        );
+        if (response.data.meals) {
+          setSearchResult(response.data.meals);
+        } else {
+          setSearchResult([]);
+        }
+      } catch (error) {
+        console.error("Error fetching meal:", error);
       }
-    } catch (error) {
-      console.error("Error fetching meal:", error);
+    } else {
+      alert("Type meal");
     }
   };
   return (
-    <div className="mainPage">
+    <div className={styles.mainPage}>
       <>
-        <header>The Meal</header>
-        <section className="Meal_of_the_Day">
-          <div className="descripton">
-            <Link to={`/meal/${item.idMeal}`} key={item.idMeal}>
-              <h2 className="title">{item.strMeal}</h2>
+        <section className={styles.Meal_of_the_Day}>
+          <div className={styles.descripton}>
+            <Link to={`/meal/${meal.idMeal}`} key={meal.idMeal}>
+              <h1 className={styles.title}>{meal.strMeal}</h1>
             </Link>
-            <div>{meal.strCategory}</div>
-            <div>{meal.strArea}</div>
+            <div className={styles.category}>
+              {meal.strCategory} | {meal.strArea}
+            </div>
           </div>
           <img
-            className="meal_photo"
+            className={styles.meal_photo}
             src={meal.strMealThumb}
-            alt={item.strMeal}
+            alt={meal.strMeal}
           />
         </section>
         <form className="Find_your_Meal" onSubmit={handleSearch}>
