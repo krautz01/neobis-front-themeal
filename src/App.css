@@ -1,4 +1,7 @@
 #root {
+  font-family: "Cardo", serif;
+  font-weight: 400;
+  font-style: normal;
   width: 1440px;
   margin: 0 auto;
   padding: 2rem;
@@ -18,7 +21,19 @@ header {
   background-color: #d49726;
   font-size: 2rem;
   font-weight: 700;
-  
+}
+
+li {
+  list-style-type: none;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  color: #d49726;
 }
 /* 
 .logo {

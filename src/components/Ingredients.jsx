@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Ingredients({meal}) {
+export default function Ingredients({ meal }) {
   console.log(meal);
   const ingredients = [];
   for (let i = 1; i <= 20; i++) {
@@ -11,15 +11,12 @@ export default function Ingredients({meal}) {
     }
   }
   return (
-    <>
-      <h2>Ingredients</h2>
-      <ul>
-        {ingredients.map((item, index) => (
-          <li key={index}>
-            {item.ingredient} - {item.measure}
-          </li>
-        ))}
-      </ul>
-    </>
+    <ul>
+      {ingredients.map((item, index) => (
+        <li key={index}>
+          {item.ingredient} - <b>{item.measure}</b>
+        </li>
+      ))}
+    </ul>
   );
 }

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import styles from "./MealPage.module.css";
 import { useParams } from "react-router";
+import styles from "./MealPage.module.css";
 import axios from "axios";
 import Ingredients from "../../components/Ingredients";
+import Button from "../../components/Button";
 
 export default function MealPage() {
   const { mealId } = useParams();
@@ -28,32 +29,30 @@ export default function MealPage() {
   }, [mealId]);
 
   return (
-    <div className={styles.mealPage}>
+    <>
       {meal && (
-        <div className={styles.meal_details_home}>
-          <section className={styles.random_meal}>
-            <div className={styles.meal_info}>
-              <h2 className={styles.title}>{meal.strMeal}</h2>
+        <div className={styles.mealPage}>
+          <section className={styles.meal_info_section}>
+            <div className={styles.meal_ingradients}>
+              <h1 className={styles.title}>{meal.strMeal}</h1>
               <p>
                 {meal.strCategory} | {meal.strArea}
               </p>
-              <Ingredients meal={meal}/>
+              <Ingredients meal={meal} />
             </div>
-            <div className={styles.meal_img}>
-              <img src={meal.strMealThumb} alt={meal.strMeal} />
-            </div>
+            <img
+              src={meal.strMealThumb}
+              alt={meal.strMeal}
+              className={styles.meal_img}
+            />
           </section>
-          <section className={styles.add_info}>
+          <section className={styles.meal_instruction}>
             <h1>Instruction</h1>
             <p>{meal.strInstructions}</p>
-            <h2>YouTube Tutorial:</h2>
-            <p className={styles.meal_link_video}>
-              <a href={meal.strYoutube}>Watch Now</a>
-            </p>
+            <Button strYoutube={meal.strYoutube} />
           </section>
         </div>
       )}
-    </div>
+    </>
   );
 }
-
