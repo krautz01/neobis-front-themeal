@@ -1,0 +1,44 @@
+.mealPage {
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.meal_info_section {
+  width: 90%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.meal_img {
+  width: 30rem;
+  height: 30rem;
+  border-radius: 1rem;
+}
+
+.meal_ingradients {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  height: 32rem;
+}
+
+.meal_category_and_land {
+  text-align: center;
+}
+
+.meal_instruction {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  align-items: left;
+}
+
+@media screen and (width < 769px) {
+  .meal_info_section {
+    flex-direction: column;
+  }
+}
