@@ -35,9 +35,9 @@ export default function MealPage() {
           <section className={styles.meal_info_section}>
             <div className={styles.meal_ingradients}>
               <h1 className={styles.title}>{meal.strMeal}</h1>
-              <p>
+              <div className={styles.meal_category_and_land}>
                 {meal.strCategory} | {meal.strArea}
-              </p>
+              </div>
               <Ingredients meal={meal} />
             </div>
             <img
@@ -47,7 +47,7 @@ export default function MealPage() {
             />
           </section>
           <section className={styles.meal_instruction}>
-            <h1>Instruction</h1>
+            <h2>Instruction</h2>
             <p>{meal.strInstructions}</p>
             <Button strYoutube={meal.strYoutube} />
           </section>

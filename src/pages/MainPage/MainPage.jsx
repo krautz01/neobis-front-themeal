@@ -27,6 +27,8 @@ export default function MainPage() {
           setSearchResult(response.data.meals);
         } else {
           setSearchResult([]);
+          alert("Meal not founded");
+          e.target.value = "";
         }
       } catch (error) {
         console.error("Error fetching meal:", error);
@@ -38,7 +40,7 @@ export default function MainPage() {
   return (
     <div className={styles.mainPage}>
       <>
-        <section className={styles.Meal_of_the_Day}>
+        <section className={styles.meal_of_the_day}>
           <div className={styles.descripton}>
             <Link to={`/meal/${meal.idMeal}`} key={meal.idMeal}>
               <h1 className={styles.title}>{meal.strMeal}</h1>
@@ -48,38 +50,41 @@ export default function MainPage() {
             </div>
           </div>
           <img
-            className={styles.meal_photo}
+            className={styles.meal_img}
             src={meal.strMealThumb}
             alt={meal.strMeal}
           />
         </section>
-        <form className="Find_your_Meal" onSubmit={handleSearch}>
+        <form className="find_your_Meal" onSubmit={handleSearch}>
           <h2>Find your Meal</h2>
           <input
+            className={styles.search_input}
             type="text"
             placeholder="Find your meal"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button type="submit">Search</button>
+          <button type="submit" className={styles.search_button}>
+            Search
+          </button>
         </form>
       </>
       {searchResult.map((item) => (
-        <div className="home" key={item.idMeal}>
-          <section className="random-meal">
-            <div className="meal-info">
-              <Link to={`/meal/${item.idMeal}`} key={item.idMeal}>
-                <h2 className="title">{item.strMeal}</h2>
-              </Link>
-              <p>
-                {item.strCategory} | {item.strArea}
-              </p>
+        <section className={styles.target_meal_section} key={item.idMeal}>
+          <img
+            src={item.strMealThumb}
+            alt={item.strMeal}
+            className={styles.meal_img}
+          />
+          <div className={styles.meal_info_link}>
+            <Link to={`/meal/${item.idMeal}`} key={item.idMeal}>
+              <h2 className={styles.title}>{item.strMeal}</h2>
+            </Link>
+            <div className={styles.category}>
+              {item.strCategory} | {item.strArea}
             </div>
-            <div className="meal-img">
-              <img src={item.strMealThumb} alt={item.strMeal} />
-            </div>
-          </section>
-        </div>
+          </div>
+        </section>
       ))}
     </div>
   );

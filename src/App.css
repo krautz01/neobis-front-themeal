@@ -2,7 +2,7 @@
   font-family: "Cardo", serif;
   font-weight: 400;
   font-style: normal;
-  width: 1440px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -72,3 +72,5 @@ h1 {
   color: #888;
 }
  */
+
+
